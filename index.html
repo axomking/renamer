@@ -1,0 +1,29 @@
+<?php
+
+// Function to generate a random string
+function generateRandomString($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+// Function to shorten a URL
+function shortenURL($url) {
+    // Generate a random string to serve as the short URL key
+    $shortKey = generateRandomString();
+    
+    // Store the short URL key and corresponding original URL in a database or file
+    // For simplicity, we will just echo the short URL in this example
+    $shortURL = "http://yourdomain.com/$shortKey";
+    echo "Short URL: $shortURL";
+}
+
+// Usage example:
+$longURL = "http://www.example.com/long/url/to/be/shortened";
+shortenURL($longURL);
+
+?>
