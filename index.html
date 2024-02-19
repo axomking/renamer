@@ -11,11 +11,16 @@
     }
 </style>
 <script>
-var lastFourDigits = 1000; // Initial value for the last four digits
-
 function generateID() {
+    var lastFourDigits = localStorage.getItem('lastFourDigits');
+    if (!lastFourDigits) {
+        lastFourDigits = 1000; // Initial value for the last four digits
+    } else {
+        lastFourDigits = parseInt(lastFourDigits);
+    }
     // Increment the last four digits and concatenate with "INP612301065"
     lastFourDigits++;
+    localStorage.setItem('lastFourDigits', lastFourDigits);
     return "INP612301065" + lastFourDigits;
 }
 
