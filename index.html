@@ -1,29 +1,51 @@
-<?php
-
-// Function to generate a random string
-function generateRandomString($length = 6) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Export Form Data to XLSX</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script> <!-- Include the XLSX library -->
+<style>
+    .hidden-label {
+        display: none;
     }
-    return $randomString;
+</style>
+<script>
+var lastFourDigits = 1000; // Initial value for the last four digits
+
+function generateID() {
+    // Increment the last four digits and concatenate with "INP612301065"
+    lastFourDigits++;
+    return "INP612301065" + lastFourDigits;
 }
 
-// Function to shorten a URL
-function shortenURL($url) {
-    // Generate a random string to serve as the short URL key
-    $shortKey = generateRandomString();
-    
-    // Store the short URL key and corresponding original URL in a database or file
-    // For simplicity, we will just echo the short URL in this example
-    $shortURL = "http://yourdomain.com/$shortKey";
-    echo "Short URL: $shortURL";
+function exportToXLSX() {
+    var id = generateID(); // Generate a new ID
+    document.getElementById("ID").value = id; // Set the ID value in the form
+
+    var formData = new FormData(document.getElementById("data-form"));
+    var workbook = XLSX.utils.book_new();
+    var worksheet = XLSX.utils.json_to_sheet([Object.fromEntries(formData)]); // Wrap form data in an array
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+    // Save workbook
+    XLSX.writeFile(workbook, 'data.xlsx');
 }
+</script>
+</head>
+<body>
+<form id="data-form">
+    <label for="crbt_cuts">CRBT Cuts:</label>
+    <input type="text" id="CRBT_CUTS" name="CRBT_CUTS"><br><br>
 
-// Usage example:
-$longURL = "http://www.example.com/long/url/to/be/shortened";
-shortenURL($longURL);
+    <label for="song">Song:</label>
+    <input type="text" id="SONG" name="SONG"><br><br>
+  
+    <label for="id">ID:</label>
+    <input type="text" id="ID" name="ID"><br><br>
 
-?>
+    <button type="button" onclick="exportToXLSX()">Export to XLSX</button>
+</form>
+</body>
+</html>
