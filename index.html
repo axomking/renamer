@@ -4,39 +4,9 @@
   <title>Multiple YouTube Videos</title>
 </head>
 <body>
-  <div id="players"></div>
-
-  <script>
-    // List of video IDs
-    var videoIds = ["pCX7kQKSU2o", "aLUiv8McIjc"];
-
-    // Function to create a YouTube player for each video
-    function onYouTubeIframeAPIReady() {
-      for (var i = 0; i < videoIds.length; i++) {
-        var player = new YT.Player('player-' + i, {
-          height: '315',
-          width: '560',
-          videoId: videoIds[i],
-          playerVars: {
-            'autoplay': 0,
-            'controls': 1,
-            'rel': 0,
-            'showinfo': 0
-          },
-          events: {
-            'onReady': onPlayerReady,
-          }
-        });
-      }
-    }
-
-    // Function called when each player is ready
-    function onPlayerReady(event) {
-      event.target.stopVideo(); // Autoplay is turned off, so stop the video
-    }
-  </script>
-
-  <!-- Include the YouTube Iframe API -->
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <div id="players">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/pCX7kQKSU2o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/aLUiv8McIjc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
 </body>
 </html>
