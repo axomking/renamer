@@ -1,56 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Export Form Data to XLSX</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script> <!-- Include the XLSX library -->
-<style>
-    .hidden-label {
-        display: none;
-    }
-</style>
-<script>
-function generateID() {
-    var lastFourDigits = localStorage.getItem('lastFourDigits');
-    if (!lastFourDigits) {
-        lastFourDigits = 1000; // Initial value for the last four digits
-    } else {
-        lastFourDigits = parseInt(lastFourDigits);
-    }
-    // Increment the last four digits and concatenate with "INP612301065"
-    lastFourDigits++;
-    localStorage.setItem('lastFourDigits', lastFourDigits);
-    return "INP612301065" + lastFourDigits;
-}
-
-function exportToXLSX() {
-    var id = generateID(); // Generate a new ID
-    document.getElementById("ID").value = id; // Set the ID value in the form
-
-    var formData = new FormData(document.getElementById("data-form"));
-    var workbook = XLSX.utils.book_new();
-    var worksheet = XLSX.utils.json_to_sheet([Object.fromEntries(formData)]); // Wrap form data in an array
-
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-
-    // Save workbook
-    XLSX.writeFile(workbook, 'data.xlsx');
-}
-</script>
+  <title>Multiple YouTube Videos</title>
 </head>
 <body>
-<form id="data-form">
-    <label for="crbt_cuts">CRBT Cuts:</label>
-    <input type="text" id="CRBT_CUTS" name="CRBT_CUTS"><br><br>
+  <div id="player"></div>
 
-    <label for="song">Song:</label>
-    <input type="text" id="SONG" name="SONG"><br><br>
-  
-    <label for="id">ID:</label>
-    <input type="text" id="ID" name="ID"><br><br>
+  <script>
+    // List of video IDs
+    var videoIds = ["pCX7kQKSU2o", "aLUiv8McIjc"];
 
-    <button type="button" onclick="exportToXLSX()">Export to XLSX</button>
-</form>
+    // Function to create a YouTube player for each video
+    function onYouTubeIframeAPIReady() {
+      for (var i = 0; i < videoIds.length; i++) {
+        var player = new YT.Player('player-' + i, {
+          height: '315',
+          width: '560',
+          videoId: videoIds[i],
+          playerVars: {
+            'autoplay': 0,
+            'controls': 1,
+            'rel': 0,
+            'showinfo': 0
+          },
+          events: {
+            'onReady': onPlayerReady,
+          }
+        });
+      }
+    }
+
+    // Function called when each player is ready
+    function onPlayerReady(event) {
+      event.target.stopVideo(); // Autoplay is turned off, so stop the video
+    }
+  </script>
+
+  <!-- Include the YouTube Iframe API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
