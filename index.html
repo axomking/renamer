@@ -12,8 +12,8 @@
         function watchVideo() {
             const videoId = 'igQKgJmIozg';  // YouTube video ID
             if (isAndroid()) {
-                // Use intent:// URL scheme to try to open the YouTube app (on Android)
-                window.location.href = "intent://m.youtube.com/watch?v=" + videoId + "#Intent;package=com.google.android.youtube;scheme=vnd.youtube;end";
+                // Open the YouTube video URL directly (no popup or intent)
+                window.location.href = "https://m.youtube.com/watch?v=" + videoId;
             } else {
                 // For non-Android devices, fallback to the YouTube website
                 window.location.href = "https://youtu.be/" + videoId;
