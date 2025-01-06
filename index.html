@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to YouTube App</title>
-    <script>
-        window.onload = function() {
-            // Replace 'VIDEO_ID' with the actual YouTube video ID
-            const videoId = "igQKgJmIozg"; 
-            
-            // Construct the intent URL
-            const intentUrl = `intent://www.youtube.com/watch?v=${videoId}#Intent;package=com.google.android.youtube;scheme=https;end;`;
-            
-            // Redirect the user to the YouTube app
-            window.location.href = intentUrl;
-        };
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One-Time Popup Redirect</title>
+  <script>
+    // Function to handle the popup
+    function redirectOnce() {
+      // Check if the popup has already been shown
+      if (!localStorage.getItem("popupShown")) {
+        // Open the specified URL in a new tab
+        window.open("https://youtu.be/fmaU3kUdz78", "_blank");
+
+        // Mark the popup as shown
+        localStorage.setItem("popupShown", "true");
+      }
+    }
+
+    // Add event listener for touch or click
+    document.addEventListener("click", redirectOnce);
+    document.addEventListener("touchstart", redirectOnce);
+  </script>
 </head>
 <body>
-    <p>Redirecting to YouTube...</p>
+  <h1>Welcome to My Website</h1>
+  <p>Touch anywhere on the screen to open a YouTube video (only once) in a new tab.</p>
 </body>
 </html>
