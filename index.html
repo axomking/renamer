@@ -20,10 +20,23 @@
             }
         }
 
-        // Use setTimeout to delay the click after a short delay
-        setTimeout(function() {
-            document.querySelector('button').click(); // Simulate a click on the button
-        }, 200); // Wait 200ms before triggering the click
+        // Function to simulate a human-like click
+        function simulateClick(element) {
+            var mouseEvent = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                clientX: 0,
+                clientY: 0,
+            });
+            element.dispatchEvent(mouseEvent);  // Dispatch the mouse event to simulate the click
+        }
+
+        // Simulate the click after the page loads
+        window.onload = function() {
+            var button = document.querySelector('button');
+            simulateClick(button);  // Simulate a human-like click on the button
+        }
     </script>
 </head>
 <body>
