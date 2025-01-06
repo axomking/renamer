@@ -3,43 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open YouTube Video</title>
+    <title>Redirect to YouTube App</title>
     <script>
-        function isAndroid() {
-            return /android/i.test(navigator.userAgent);
-        }
-
-        function watchVideo() {
-            const videoId = 'igQKgJmIozg';  // YouTube video ID
-            if (isAndroid()) {
-                // Use intent:// URL scheme to try to open the YouTube app (on Android)
-                window.location.href = "intent://m.youtube.com/watch?v=" + videoId + "#Intent;package=com.google.android.youtube;scheme=vnd.youtube;end";
-            } else {
-                // For non-Android devices, fallback to the YouTube website
-                window.location.href = "https://youtu.be/" + videoId;
-            }
-        }
-
-        // Function to simulate a human-like click
-        function simulateClick(element) {
-            var mouseEvent = new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true,
-                view: window,
-                clientX: 0,
-                clientY: 0,
-            });
-            element.dispatchEvent(mouseEvent);  // Dispatch the mouse event to simulate the click
-        }
-
-        // Simulate the click after the page loads
         window.onload = function() {
-            var button = document.querySelector('button');
-            simulateClick(button);  // Simulate a human-like click on the button
-        }
+            // Replace 'VIDEO_ID' with the actual YouTube video ID
+            const videoId = "igQKgJmIozg"; 
+            
+            // Construct the intent URL
+            const intentUrl = `intent://www.youtube.com/watch?v=${videoId}#Intent;package=com.google.android.youtube;scheme=https;end;`;
+            
+            // Redirect the user to the YouTube app
+            window.location.href = intentUrl;
+        };
     </script>
 </head>
 <body>
-    <button onclick="watchVideo()">Watch YouTube Video</button>
+    <p>Redirecting to YouTube...</p>
 </body>
 </html>
