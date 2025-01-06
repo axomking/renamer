@@ -3,27 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>One-Time Popup Redirect</title>
-  <script>
-    // Function to handle the popup
-    function redirectOnce() {
-      // Check if the popup has already been shown
-      if (!localStorage.getItem("popupShown")) {
-        // Open the specified URL in a new tab
-        window.open("https://youtu.be/fmaU3kUdz78", "_blank");
+  <title>Modal Example</title>
+  <style>
+    /* Modal styles */
+    #popupModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to My Website</h1>
+  <p>Touch anywhere on the screen to see a modal with a link.</p>
 
-        // Mark the popup as shown
+  <div id="overlay"></div>
+  <div id="popupModal">
+    <p>Check out this amazing video:</p>
+    <a href="https://youtu.be/fmaU3kUdz78" target="_blank">Watch Now</a>
+  </div>
+
+  <script>
+    // Show modal on click or touch
+    function showModalOnce() {
+      if (!localStorage.getItem("popupShown")) {
+        document.getElementById("popupModal").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
         localStorage.setItem("popupShown", "true");
       }
     }
 
-    // Add event listener for touch or click
-    document.addEventListener("click", redirectOnce);
-    document.addEventListener("touchstart", redirectOnce);
+    // Add event listener
+    document.addEventListener("click", showModalOnce);
+    document.addEventListener("touchstart", showModalOnce);
   </script>
-</head>
-<body>
-  <h1>Welcome to My Website</h1>
-  <p>Touch anywhere on the screen to open a YouTube video (only once) in a new tab.</p>
 </body>
 </html>
