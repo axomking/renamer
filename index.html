@@ -46,13 +46,13 @@
 </head>
 <body>
   <h1>Welcome to My Website</h1>
-  <p>Touch anywhere on the screen to see a modal with embedded music that plays automatically.</p>
+  <p>Touch anywhere on the screen to see a modal with embedded music that will attempt to play automatically.</p>
 
   <div id="overlay"></div>
   <div id="popupModal">
     <button id="closeModal">Close</button>
     <p>Check out this amazing playlist:</p>
-    <iframe src="https://www.jiosaavn.com/embed/playlist/1224127175" width="300" height="380" frameborder="0" allowfullscreen></iframe>
+    <iframe id="jioIframe" src="https://www.jiosaavn.com/embed/playlist/1224127175" width="300" height="380" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <script>
@@ -60,6 +60,14 @@
     function showModal() {
       document.getElementById("popupModal").style.display = "block";
       document.getElementById("overlay").style.display = "block";
+
+      // Try to autoplay by simulating a play action
+      const iframe = document.getElementById("jioIframe");
+      const iframeSrc = iframe.src;
+
+      // Reload the iframe with a small delay to trigger autoplay
+      iframe.src = '';
+      iframe.src = iframeSrc;
     }
 
     // Close modal
