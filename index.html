@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to YouTube...</title>
+    <title>Open YouTube Video</title>
     <script>
         function isAndroid() {
             return /android/i.test(navigator.userAgent);
         }
 
-        // Automatically redirect to the YouTube video
-        window.onload = function() {
+        function watchVideo() {
             const videoId = 'igQKgJmIozg';  // YouTube video ID
             if (isAndroid()) {
-                // Use intent:// URL scheme to open the YouTube app immediately on Android
+                // Use intent:// URL scheme to try to open the YouTube app (on Android)
                 window.location.href = "intent://m.youtube.com/watch?v=" + videoId + "#Intent;package=com.google.android.youtube;scheme=vnd.youtube;end";
             } else {
-                // For non-Android devices, immediately open the YouTube website
+                // For non-Android devices, fallback to the YouTube website
                 window.location.href = "https://youtu.be/" + videoId;
             }
         }
     </script>
 </head>
 <body>
-    <p>Redirecting you to the video...</p>
+    <button onclick="watchVideo()">Watch YouTube Video</button>
 </body>
 </html>
