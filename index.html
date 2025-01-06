@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <title>Redirecting...</title>
     <script>
-        window.location.replace("https://www.youtube.com/watch?v=igQKgJmIozg");
+        // Function to detect if it's an Android device
+        function isAndroid() {
+            return /android/i.test(navigator.userAgent);
+        }
+
+        // Redirect after 2 seconds
+        setTimeout(function() {
+            if (isAndroid()) {
+                window.location.href = "intent://m.youtube.com/watch?v=igQKgJmIozg&feature=mweb_c3_open_app_11268432&itc_campaign=mweb_c3_open_app_11268432&redirect_app_store_ios=1&app=desktop#Intent;package=com.google.android.youtube;scheme=vnd.youtube;launchFlags=268435456;end";
+            } else {
+                // Fallback to YouTube website for other devices
+                window.location.href = "https://www.youtube.com/watch?v=igQKgJmIozg";
+            }
+        }, 2000); // Adjust the time as needed
     </script>
 </head>
 <body>
+    <p>If you are not redirected, <a href="https://www.youtube.com/watch?v=igQKgJmIozg">click here to watch on YouTube.</a></p>
 </body>
 </html>
