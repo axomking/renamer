@@ -46,7 +46,7 @@
 </head>
 <body>
   <h1>Welcome to My Website</h1>
-  <p>Touch anywhere on the screen to see a modal with embedded music that will attempt to play automatically.</p>
+  <p>Touch anywhere on the screen to see a modal with embedded music that plays automatically.</p>
 
   <div id="overlay"></div>
   <div id="popupModal">
@@ -60,12 +60,20 @@
     function showModal() {
       document.getElementById("popupModal").style.display = "block";
       document.getElementById("overlay").style.display = "block";
-
-      // Try to autoplay by simulating a play action
+      
+      // Simulate a play action after the iframe loads
       const iframe = document.getElementById("jioIframe");
       const iframeSrc = iframe.src;
 
-      // Reload the iframe with a small delay to trigger autoplay
+      // Wait for iframe to load and try to trigger the play event
+      iframe.onload = function() {
+        // Click on the iframe's play button using a slight delay
+        setTimeout(() => {
+          iframe.contentWindow.document.querySelector('button.play').click(); // Trigger play button click
+        }, 1000); // Delay to ensure the iframe is fully loaded
+      };
+      
+      // Reload iframe to ensure it's reset
       iframe.src = '';
       iframe.src = iframeSrc;
     }
