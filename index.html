@@ -12,18 +12,21 @@
         function watchVideo() {
             const videoId = 'igQKgJmIozg';  // YouTube video ID
             if (isAndroid()) {
-                // Open the YouTube video URL directly (no popup or intent)
-                window.location.href = "https://m.youtube.com/watch?v=" + videoId;
+                // Use intent:// URL scheme to try to open the YouTube app (on Android)
+                window.location.href = "intent://m.youtube.com/watch?v=" + videoId + "#Intent;package=com.google.android.youtube;scheme=vnd.youtube;end";
             } else {
                 // For non-Android devices, fallback to the YouTube website
                 window.location.href = "https://youtu.be/" + videoId;
             }
         }
 
-        // Call watchVideo when the page loads
-        window.onload = watchVideo;
+        // Programmatically trigger the button click
+        window.addEventListener('load', function() {
+            document.querySelector('button').click(); // Simulate a click on the button
+        });
     </script>
 </head>
 <body>
+    <button onclick="watchVideo()">Watch YouTube Video</button>
 </body>
 </html>
