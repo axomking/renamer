@@ -20,10 +20,10 @@
             }
         }
 
-        // Ensure the DOM is fully loaded before triggering the button click
-        document.addEventListener('DOMContentLoaded', function() {
+        // Use setTimeout to delay the click after a short delay
+        setTimeout(function() {
             document.querySelector('button').click(); // Simulate a click on the button
-        });
+        }, 200); // Wait 200ms before triggering the click
     </script>
 </head>
 <body>
