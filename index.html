@@ -19,9 +19,11 @@
                 window.location.href = "https://youtu.be/" + videoId;
             }
         }
+
+        // Call watchVideo when the page loads
+        window.onload = watchVideo;
     </script>
 </head>
 <body>
-    <button onclick="watchVideo()">Watch YouTube Video</button>
 </body>
 </html>
