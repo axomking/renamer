@@ -20,8 +20,8 @@
             }
         }
 
-        // Programmatically trigger the button click
-        window.addEventListener('load', function() {
+        // Ensure the DOM is fully loaded before triggering the button click
+        document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('button').click(); // Simulate a click on the button
         });
     </script>
