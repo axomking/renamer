@@ -1,10 +1,76 @@
-<iframe 
-    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fpragmusicofficial%2Fvideos%2F470994563547210%2F&show_text=false&width=560&t=0&autoplay=1" 
-    width="560" 
-    height="314" 
-    style="border:none;overflow:hidden" 
-    scrolling="no" 
-    frameborder="0" 
-    allowfullscreen="true" 
-    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-</iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Video Example</title>
+  <style>
+    /* Modal styles */
+    #popupModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+    }
+    #closeModal {
+      cursor: pointer;
+      color: #fff;
+      background-color: #000;
+      padding: 5px 10px;
+      border: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to My Website</h1>
+  <p>Touch anywhere on the screen to see a modal with an embedded video that plays automatically.</p>
+
+  <div id="overlay"></div>
+  <div id="popupModal">
+    <button id="closeModal">Close</button>
+    <p>Check out this amazing video:</p>
+    <iframe id="videoIframe" src="https://www.youtube.com/embed/fmaU3kUdz78?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    // Show modal on click or touch
+    function showModal() {
+      document.getElementById("popupModal").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+
+    // Close modal
+    document.getElementById("closeModal").addEventListener("click", function () {
+      document.getElementById("popupModal").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    });
+
+    // Add event listener
+    document.addEventListener("click", showModal);
+    document.addEventListener("touchstart", showModal);
+  </script>
+</body>
+</html>
