@@ -40,31 +40,35 @@
     </div>
 
     <script>
-        // YouTube Video ID (replace with your desired video)
-        const youtubeVideoId = 'dQw4w9WgXcQ'; // Example video ID
-        let popupWindow = null;
+        const youtubeVideoId = 'dQw4w9WgXcQ'; // Example YouTube video ID
+        let isPlaying = false; // Track if the video is already playing
+        let popupWindow = null; // Track the small popup window
 
         // Function to show the popup and play the YouTube video
         function showPopup() {
-            document.getElementById('popup').style.display = 'block';
-
-            // Set the iframe source to autoplay the video with muted audio
+            const popup = document.getElementById('popup');
             const iframe = document.getElementById('youtubeIframe');
-            iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`;
 
-            // Attempt to open a small popup window with the same video
+            // Show the popup
+            popup.style.display = 'block';
+
+            // Only set the iframe source if it's not already playing
+            if (!isPlaying) {
+                iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`;
+                isPlaying = true;
+            }
+
+            // Open the small popup window
             if (popupWindow && !popupWindow.closed) {
-                popupWindow.focus();  // Bring focus to the already opened popup window
+                popupWindow.focus();
             } else {
                 popupWindow = window.open(
                     `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`,
                     '_blank',
                     'width=400,height=300,top=100,left=100'
                 );
-                if (popupWindow) {
-                    popupWindow.blur(); // Remove focus from the popup window
-                    window.focus();     // Return focus to the main window
-                } else {
+
+                if (!popupWindow) {
                     alert('Popup blocked! Please allow popups for this site.');
                 }
             }
@@ -72,11 +76,15 @@
 
         // Function to close the popup
         function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-
-            // Stop the video by resetting the iframe src
+            const popup = document.getElementById('popup');
             const iframe = document.getElementById('youtubeIframe');
-            iframe.src = ''; // Clear the src to stop the video
+
+            // Hide the popup
+            popup.style.display = 'none';
+
+            // Stop the video by resetting the iframe source
+            iframe.src = '';
+            isPlaying = false;
         }
 
         // Event listener for click or touch anywhere on the screen
