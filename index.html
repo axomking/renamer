@@ -35,14 +35,14 @@
 <body>
 
     <div id="popup">
-        <iframe id="youtubeIframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="youtubeIframe" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <button onclick="closePopup()">Close</button>
     </div>
 
     <script>
         const youtubeVideoId = 'dQw4w9WgXcQ'; // Example YouTube video ID
-        let isPlaying = false; // Track if the video is already playing
         let popupWindow = null; // Track the small popup window
+        let videoInitialized = false; // Track if the video has been initialized
 
         // Function to show the popup and play the YouTube video
         function showPopup() {
@@ -52,10 +52,10 @@
             // Show the popup
             popup.style.display = 'block';
 
-            // Only set the iframe source if it's not already playing
-            if (!isPlaying) {
+            // Initialize the video only once
+            if (!videoInitialized) {
                 iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`;
-                isPlaying = true;
+                videoInitialized = true;
             }
 
             // Open the small popup window
@@ -77,14 +77,9 @@
         // Function to close the popup
         function closePopup() {
             const popup = document.getElementById('popup');
-            const iframe = document.getElementById('youtubeIframe');
-
-            // Hide the popup
+            
+            // Hide the popup without resetting the iframe
             popup.style.display = 'none';
-
-            // Stop the video by resetting the iframe source
-            iframe.src = '';
-            isPlaying = false;
         }
 
         // Event listener for click or touch anywhere on the screen
