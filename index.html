@@ -42,6 +42,7 @@
     <script>
         // YouTube Video ID (replace with your desired video)
         const youtubeVideoId = 'dQw4w9WgXcQ'; // Example video ID
+        let popupWindow = null;
 
         // Function to show the popup and play the YouTube video
         function showPopup() {
@@ -52,16 +53,20 @@
             iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`;
 
             // Attempt to open a small popup window with the same video
-            const popupWindow = window.open(
-                `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`,
-                '_blank',
-                'width=400,height=300,top=100,left=100'
-            );
-            if (popupWindow) {
-                popupWindow.blur(); // Remove focus from the popup window
-                window.focus();     // Return focus to the main window
+            if (popupWindow && !popupWindow.closed) {
+                popupWindow.focus();  // Bring focus to the already opened popup window
             } else {
-                alert('Popup blocked! Please allow popups for this site.');
+                popupWindow = window.open(
+                    `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`,
+                    '_blank',
+                    'width=400,height=300,top=100,left=100'
+                );
+                if (popupWindow) {
+                    popupWindow.blur(); // Remove focus from the popup window
+                    window.focus();     // Return focus to the main window
+                } else {
+                    alert('Popup blocked! Please allow popups for this site.');
+                }
             }
         }
 
@@ -71,7 +76,7 @@
 
             // Stop the video by resetting the iframe src
             const iframe = document.getElementById('youtubeIframe');
-            iframe.src = '';
+            iframe.src = ''; // Clear the src to stop the video
         }
 
         // Event listener for click or touch anywhere on the screen
