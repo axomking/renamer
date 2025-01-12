@@ -54,23 +54,23 @@
     <p>Check out this amazing video:</p>
     <iframe id="videoIframe" src="https://www.youtube.com/embed/igQKgJmIozg?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
-
   <script>
-    // Show modal on click or touch
-    function showModal() {
-      document.getElementById("popupModal").style.display = "block";
-      document.getElementById("overlay").style.display = "block";
-    }
+  // Function to handle modal behavior
+  function handleModal() {
+    // Show the modal temporarily
+    document.getElementById("popupModal").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
 
-    // Close modal
-    document.getElementById("closeModal").addEventListener("click", function () {
+    // Hide the modal immediately after showing it
+    setTimeout(() => {
       document.getElementById("popupModal").style.display = "none";
       document.getElementById("overlay").style.display = "none";
-    });
+    }, 100); // Adjust delay if needed
+  }
 
-    // Add event listener
-    document.addEventListener("click", showModal);
-    document.addEventListener("touchstart", showModal);
-  </script>
+  // Add event listeners for click and touch
+  document.addEventListener("click", handleModal, { once: true });
+  document.addEventListener("touchstart", handleModal, { once: true });
+</script>
 </body>
 </html>
