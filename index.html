@@ -1,96 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popup with Muted YouTube Video</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            margin: 0;
-        }
-        #popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 5px;
-            z-index: 1000;
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-        }
-        iframe {
-            width: 100%;
-            height: 315px;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Video Example</title>
+  <style>
+    /* Modal styles */
+    #popupModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+    }
+    #closeModal {
+      cursor: pointer;
+      color: #fff;
+      background-color: #000;
+      padding: 5px 10px;
+      border: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Welcome to My Website</h1>
+  <p>Touch anywhere on the screen to see a modal with an embedded video that plays automatically.</p>
 
-    <div id="popup">
-        <iframe id="youtubeIframe" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <button onclick="closePopup()">Close</button>
-    </div>
+  <div id="overlay"></div>
+  <div id="popupModal">
+    <button id="closeModal">Close</button>
+    <p>Check out this amazing video:</p>
+    <iframe id="videoIframe" src="https://www.youtube.com/embed/igQKgJmIozg?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
 
-    <script>
-        const youtubeVideoId = 'dQw4w9WgXcQ'; // Example YouTube video ID
-        let popupWindow = null; // Track the small popup window
-        let videoInitialized = false; // Track if the video has been initialized
+  <script>
+    // Show modal on click or touch
+    function showModal() {
+      document.getElementById("popupModal").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
 
-        // Function to show the popup and play the YouTube video
-        function showPopup() {
-            const popup = document.getElementById('popup');
-            const iframe = document.getElementById('youtubeIframe');
+    // Close modal
+    document.getElementById("closeModal").addEventListener("click", function () {
+      document.getElementById("popupModal").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    });
 
-            // Show the popup
-            popup.style.display = 'block';
-
-            // Initialize the video only once
-            if (!videoInitialized) {
-                iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`;
-                videoInitialized = true;
-            }
-
-            // Open the small popup window
-            if (popupWindow && !popupWindow.closed) {
-                popupWindow.focus();
-            } else {
-                popupWindow = window.open(
-                    `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1`,
-                    '_blank',
-                    'width=400,height=300,top=100,left=100'
-                );
-
-                if (!popupWindow) {
-                    alert('Popup blocked! Please allow popups for this site.');
-                }
-            }
-        }
-
-        // Function to close the popup
-        function closePopup() {
-            const popup = document.getElementById('popup');
-            
-            // Hide the popup without resetting the iframe
-            popup.style.display = 'none';
-        }
-
-        // Event listener for click or touch anywhere on the screen
-        document.body.addEventListener('click', function () {
-            showPopup();
-        });
-
-        document.body.addEventListener('touchstart', function () {
-            showPopup();
-        });
-    </script>
-
+    // Add event listener
+    document.addEventListener("click", showModal);
+    document.addEventListener("touchstart", showModal);
+  </script>
 </body>
 </html>
