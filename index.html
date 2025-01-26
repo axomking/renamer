@@ -1,5 +1,56 @@
-<meta property="og:url" content="https://axomking.github.io/renamer/" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Koliya Senai | Rupali Kashyap | Kalyanjit Dutta | Assamese Bihu Song (Folk Fusion) 2025" />
-<meta property="og:image" content="https://img.youtube.com/vi/igQKgJmIozg/hqdefault.jpg" />
-<meta property="og:video:type" content="text/html" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" content="https://axomking.github.io/renamer/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Koliya Senai | Rupali Kashyap | Kalyanjit Dutta | Assamese Bihu Song (Folk Fusion) 2025" />
+    <meta property="og:image" content="https://img.youtube.com/vi/igQKgJmIozg/hqdefault.jpg" />
+    <meta property="og:video:type" content="text/html" />
+    <title>Redirecting...</title>
+    <script>
+        function Deeplink() {
+            const videoId = "igQKgJmIozg";
+            const webUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            const androidDeeplink = `vnd.youtube://${videoId}`;
+            const iosDeeplink = `vnd.youtube://${videoId}`;
+
+            // Detect the device
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Android detection
+            if (/android/i.test(userAgent)) {
+                // Try to open YouTube app via deeplink
+                window.location.href = androidDeeplink;
+
+                // Fallback to web URL after a delay if app is not installed
+                setTimeout(() => {
+                    window.location.href = webUrl;
+                }, 2000);
+            }
+            // iOS detection
+            else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // Try to open YouTube app via deeplink
+                window.location.href = iosDeeplink;
+
+                // Fallback to web URL after a delay if app is not installed
+                setTimeout(() => {
+                    window.location.href = webUrl;
+                }, 2000);
+            }
+            // Other devices
+            else {
+                // Redirect to YouTube web URL
+                window.location.href = webUrl;
+            }
+        }
+
+        // Run the Deeplink function on page load
+        window.onload = Deeplink;
+    </script>
+</head>
+<body>
+    <p>If you are not redirected automatically, <a href="https://www.youtube.com/watch?v=igQKgJmIozg">click here</a>.</p>
+</body>
+</html>
