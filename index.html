@@ -1,76 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modal Video Example</title>
-  <style>
-    /* Modal styles */
-    #popupModal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      border: 1px solid #ccc;
-      padding: 20px;
-      z-index: 1000;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-    iframe {
-      width: 100%;
-      height: 400px;
-    }
-    #closeModal {
-      cursor: pointer;
-      color: #fff;
-      background-color: #000;
-      padding: 5px 10px;
-      border: none;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Welcome to My Website</h1>
-  <p>Touch anywhere on the screen to see a modal with an embedded video that plays automatically.</p>
-
-  <div id="overlay"></div>
-  <div id="popupModal">
-    <button id="closeModal">Close</button>
-    <p>Check out this amazing video:</p>
-    <iframe id="videoIframe" src="https://www.youtube.com/embed/CH00pg0kk38?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  </div>
-  <script>
-  // Function to handle modal behavior
-  function handleModal() {
-    // Show the modal temporarily
-    document.getElementById("popupModal").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-
-    // Hide the modal immediately after showing it
-    setTimeout(() => {
-      document.getElementById("popupModal").style.display = "none";
-      document.getElementById("overlay").style.display = "none";
-    }, 100); // Adjust delay if needed
-  }
-
-  // Add event listeners for click and touch
-  document.addEventListener("click", handleModal, { once: true });
-  document.addEventListener("touchstart", handleModal, { once: true });
-</script>
-</body>
-</html>
+<meta property="og:url" content="https://axomking.github.io/renamer/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="(Your Website Title Here)" />
+<meta property="og:description" content="(Your Website Description Here)" />
+<meta property="og:image" content="https://img.youtube.com/vi/igQKgJmIozg/hqdefault.jpg" />
+<meta property="og:video:url" content="https://www.youtube.com/watch?v=igQKgJmIozg" />
+<meta property="og:video:secure_url" content="https://www.youtube.com/watch?v=igQKgJmIozg" />
+<meta property="og:video:type" content="text/html" />
